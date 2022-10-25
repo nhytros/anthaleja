@@ -9,6 +9,7 @@ use App\Models\Market\Product;
 use App\Models\Market\Section;
 use App\Models\Market\Category;
 use App\Models\Market\ProductAttribute;
+use App\Models\Market\ProductImage;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -71,6 +72,13 @@ class Market_Products extends Seeder
                     'price' => $price,
                     'stock' => $faker->numberBetween(1, 12),
                     'status' => true,
+                ]);
+            }
+            for ($i = 1; $i <= rand(3, 6); $i++) {
+                $images = ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => $faker->imageUrl(800, 600, null, true, $product->id . '-' . $i, false, 'png'),
+                    'status' => 1,
                 ]);
             }
         }

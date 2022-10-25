@@ -70,7 +70,7 @@
                             </div>
                         @endif
                         <form action="{{ $product ? route('admin.market.product.update', $product->slug) : route('admin.market.product.store') }}"
-                            method="post">@csrf
+                            method="post" enctype="multipart/form-data">@csrf
                             <div class="input-group mb-2">
                                 <label class="input-group-text" for="selectCategory">{!! getIcon('fas', 'list') !!}</label>
                                 <select class="form-select" id="selectCategory" name="category_id">
@@ -139,8 +139,8 @@
                             <div class="input-group mb-2" id="promo_price">
                                 <span class="input-group-text">{!! athel() !!}</span>
                                 <input type="text" class="form-control" name="promo_price"
-                                    value="{{ $product ? $product->promo_price : old('promo_price') }}" placeholder="{{ __('Promotion price') }}"
-                                    @unlessrole('admin') disabled @else @endunlessrole />
+                                    value="{{ $product ? $product->promo_price : old('promo_price') }}"
+                                    placeholder="{{ __('Promotion price') }}" @unlessrole('admin') disabled @else @endunlessrole />
                             </div>
                             <div class="input-group mb-2">
                                 <span class="input-group-text">{!! getIcon('fas', 'calendar') !!}</span>
@@ -175,7 +175,15 @@
                                         {!! getIcon('fas', 'image') !!}
                                     @endif
                                 </label>
-                                <input type="file" class="form-control" id="fileMainImage" accept="image/*">
+                                <input type="file" class="form-control" id="fileMainImage" name="main_image" accept="image/*">
+                            </div>
+                            <div class="input-group mb-2">
+                                <label class="input-group-text" for="fileMainImage">
+                                    @if ($product)
+                                        {!! getIcon('fas', 'images') !!}
+                                    @endif
+                                </label>
+                                <input type="file" class="form-control" id="fileImages" name="images[]" accept="image/*" multiple />
                             </div>
                             <div class="input-group mb-2">
                                 <label class="input-group-text" for="fileVideo">
@@ -186,7 +194,7 @@
                                     @endif
 
                                 </label>
-                                <input type="file" class="form-control" id="fileVideo" accept="video/*">
+                                <input type="file" class="form-control" id="fileVideo" name="video" accept="video/*">
                             </div>
                             <div class="input-group mb-2">
                                 <span class="input-group-text">{{ __('Description') }}</span>

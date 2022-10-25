@@ -48,4 +48,7 @@ Route::middleware('role:vendor|admin')->prefix('admin/market')->name('admin.mark
     Route::get('product/{slug}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('product/{slug}/add_attributes', [ProductController::class, 'add_attributes'])->name('product.attributes.add');
     Route::post('product/{slug}/attributes/store', [ProductController::class, 'store_attributes'])->name('product.attributes.store');
+    Route::get('product/{slug}/attribute/{sku}/edit', [ProductController::class, 'edit_attribute'])->name('product.attribute.edit');
+    Route::get('product/{slug}/attribute/{sku}/delete', [ProductController::class, 'delete_attribute'])->name('product.attribute.delete');
+    Route::post('product/{slug}/attributes/{sku}/update', [ProductController::class, 'update_attributes'])->name('product.attributes.update');
 });

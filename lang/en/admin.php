@@ -68,5 +68,7 @@ return [
     'market.category.main' => 'Main category',
     'market.category.main_level' => 'Main level',
     'market.product.attributes.added' => 'Product attributes has been added',
+    'market.product.attributes.sku_exist' => 'SKU already exists.',
+    'market.product.attributes.size_exist' => 'Size already exists.',
     'market.product.featured_info' => 'Featured products are shown most frequently on the main page. This service costs AA 5 per month.',
 ];

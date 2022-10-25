@@ -141,27 +141,48 @@ class ProductController extends Controller
     {
         $title = trans('admin.market.attributes.add');
         $product = $slug ? Product::where('slug', $slug)->firstOrFail() : false;
-        return view('admin.market.products.add_attributes', compact('title', 'product'));
+        return view('admin.market.products.manage_attributes', compact('title', 'product'));
     }
 
     public function store_attributes(Request $request, $slug)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
+        $product = Product::with('attributes')->where('slug', $slug)->firstOrFail();
         $data = $request->all();
+
         foreach ($data['sku'] as $key => $value) {
             if (!empty($value)) {
+                $skuCount = ProductAttribute::where('sku', $value)->count();
+                $sizeCount = ProductAttribute::where(['product_id' => $product->id, 'size' => $data['size'][$key]])->count();
+                if ($skuCount > 0) {
+                    return back()->withDanger(trans('admin.market.product.attributes.sku_exist'));
+                }
+                if ($sizeCount > 0) {
+                    return back()->withDanger(trans('admin.market.product.attributes.size_exist'));
+                }
                 $attribute = new ProductAttribute;
                 $attribute->product_id = $product->id;
                 $attribute->sku = $value;
-                dd($value['size']['key']);
-                $attribute->size = $value['size']['key'];
-                $attribute->price = $value['price']['key'];
-                $attribute->stock = $value['stock']['key'];
+                $attribute->size = $data['size'][$key];
+                $attribute->price = $data['price'][$key];
+                $attribute->stock = $data['stock'][$key];
                 $attribute->status = 1;
                 $attribute->save();
             }
         }
         return back()->withSuccess(trans('admin.market.product.attributes.added'));
+    }
+
+    public function edit_attribute($slug, $sku)
+    {
+        $title = null;
+        $product = Product::with('attributes')->where('slug', $slug)->firstOrFail();
+        $attributes = ProductAttribute::where(['product_id' => $product->id, 'sku' => $sku])->firstOrFail();
+        return view('admin.market.products.manage_attribute', compact('title', 'product', 'attributes'));
+    }
+
+    public function update_attributes(Request $request, $slug, $sku)
+    {
+        dd($request, $slug, $sku);
     }
 
     public function delete($slug)

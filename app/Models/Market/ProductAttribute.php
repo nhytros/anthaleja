@@ -4,11 +4,11 @@ namespace App\Models\Market;
 
 use Spatie\Sluggable\{HasSlug, SlugOptions};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\{Model, SoftDeletes};
+use Illuminate\Database\Eloquent\{Model};
 
 class ProductAttribute extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     public $table = 'market_product_attributes';
     public $timestamps = false;
