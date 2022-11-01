@@ -28,7 +28,6 @@ return new class extends Migration
             $table->datetime('end_promo')->nullable();
             $table->decimal('price', 12, 2)->nullable()->default(0);
             $table->decimal('discount', 12, 2)->nullable()->default(0);
-            $table->decimal('price_promo', 12, 2)->nullable()->default(0);
             $table->decimal('weight', 12, 2)->nullable()->default(0);
             $table->string('main_image')->nullable();
             $table->string('video')->nullable();
@@ -38,6 +37,7 @@ return new class extends Migration
             $table->string('meta_keywords')->nullable();
             $table->boolean('is_featured')->nullable()->default(0);
             $table->boolean('status')->nullable()->default(0);
+            $table->boolean('is_bestseller')->nullable()->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

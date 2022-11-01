@@ -43,4 +43,24 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id')->where('status', 1);
     }
+
+    public static function details($slug)
+    {
+        $details = self::select('id', 'name', 'slug', 'description')->with(['subcategories' => function ($query) {
+            $query->select('id', 'parent_id', 'name', 'slug');
+        }])->where('slug', $slug)->firstOrFail();
+        $cIDs[] = $details->id;
+        foreach ($details->subCategories as $key => $sub) {
+            $cIDs[] = $sub->id;
+        }
+        if ($details->parent_id == 0) {
+            $breadcrumb = '<li class="breadcrumb-item" active" aria-current="page"><a href="' . route('market.category', $details->slug) . '">' . $details->name . '</a></li>';
+        } else {
+            $parent = Category::select('name', 'slug')->where('id', $details->parent_id)->first();
+            $breadcrumb = '<li class="breadcrumb-item"><a href="' . route('market.category', $details->slug) . '">' . $details->name . '</a></li>';
+            $breadcrumb .= '<li class="breadcrumb-item active" aria-current="page"><a href="' . route('market.category', $parent->slug) . '">' . $parent->name . '</a></li>';
+        }
+        // return ['cIDs' => $cIDs, 'details' => $details, 'breadcrumb' => $breadcrumb];
+        return compact('cIDs', 'details', 'breadcrumb');
+    }
 }

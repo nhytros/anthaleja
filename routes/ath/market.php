@@ -1,11 +1,16 @@
 <?php
 
+use App\Models\Market\Category;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Market\ProductController;
+use App\Http\Controllers\Market\MarketController;
 use App\Http\Controllers\Admin\Market\BrandController;
+use App\Http\Controllers\Admin\Market\BannerController;
+use App\Http\Controllers\Admin\Market\FilterController;
 use App\Http\Controllers\Admin\Market\VendorController;
+use App\Http\Controllers\Admin\Market\ProductController;
 use App\Http\Controllers\Admin\Market\SectionController;
 use App\Http\Controllers\Admin\Market\CategoryController;
+use App\Http\Controllers\Market\ProductController as UProductController;
 
 Route::middleware('role:vendor|admin')->prefix('admin/market')->name('admin.market.')->group(function () {
     Route::get('vendors', [VendorController::class, 'index'])->name('vendors');
@@ -51,4 +56,42 @@ Route::middleware('role:vendor|admin')->prefix('admin/market')->name('admin.mark
     Route::get('product/{slug}/attribute/{sku}/edit', [ProductController::class, 'edit_attribute'])->name('product.attribute.edit');
     Route::get('product/{slug}/attribute/{sku}/delete', [ProductController::class, 'delete_attribute'])->name('product.attribute.delete');
     Route::post('product/{slug}/attributes/{sku}/update', [ProductController::class, 'update_attributes'])->name('product.attributes.update');
+
+    // Filters
+    Route::get('filters', [FilterController::class, 'index'])->name('filters');
+    Route::post('filter/store', [FilterController::class, 'store'])->name('filter.store');
+    Route::get('filter/{slug}/edit', [FilterController::class, 'edit'])->name('filter.edit');
+    Route::post('filter/{slug}/update', [FilterController::class, 'update'])->name('filter.update');
+    Route::get('filter/{slug}/delete', [FilterController::class, 'delete'])->name('filter.delete');
+    Route::get('filter/{slug}/restore', [FilterController::class, 'restore'])->name('filter.restore');
+    Route::get('filter/{slug}/destroy', [FilterController::class, 'destroy'])->name('filter.destroy');
+
+    // Filter Values
+    Route::get('filter/values', [FilterController::class, 'values'])->name('filter.values');
+    Route::post('filter/value/store', [FilterController::class, 'value_store'])->name('filter.value.store');
+    Route::get('filter/value/{slug}/edit', [FilterController::class, 'value_edit'])->name('filter.value.edit');
+    Route::post('filter/value/{slug}/update', [FilterController::class, 'value_update'])->name('filter.value.update');
+    Route::get('filter/value/{slug}/delete', [FilterController::class, 'value_delete'])->name('filter.value.delete');
+    Route::get('filter/value/{slug}/restore', [FilterController::class, 'value_restore'])->name('filter.value.restore');
+    Route::get('filter/value/{slug}/destroy', [FilterController::class, 'value_destroy'])->name('filter.value.destroy');
+
+
+    // Banner
+    Route::get('banners', [BannerController::class, 'index'])->name('banners');
+    Route::post('banner/store', [BannerController::class, 'store'])->name('banner.store');
+    Route::get('banner/{slug}/edit', [BannerController::class, 'edit'])->name('banner.edit');
+    Route::post('banner/{slug}/update', [BannerController::class, 'update'])->name('banner.update');
+    Route::get('banner/{slug}/delete', [BannerController::class, 'delete'])->name('banner.delete');
+    Route::get('banner/{slug}/restore', [BannerController::class, 'restore'])->name('banner.restore');
+    Route::get('banner/{slug}/destroy', [BannerController::class, 'destroy'])->name('banner.destroy');
+});
+
+Route::middleware(['auth'])->prefix('market')->name('market.')->group(function () {
+    Route::get('/', [MarketController::class, 'index'])->name('home');
+    // $catUrls = Category::select('slug')->where('status', 1)->pluck('slug');
+    // foreach ($catUrls as $url) {
+    //     Route::get('/category/' . $url, [MarketController::class, 'listing']);
+    // }
+    Route::get('/category/{slug}', [UProductController::class, 'listing'])->name('category');
+    Route::post('/filters', [UProductController::class, 'filters'])->name('filters');
 });

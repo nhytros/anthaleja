@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(Market_Sections_and_Categories::class);
         $this->call(Market_Brands::class);
         $this->call(Market_Products::class);
+        $this->call(Market_ProductsFilters::class);
+        $this->call(Market_Banners::class);
         // $this->call(Korfball::class);
     }
 }

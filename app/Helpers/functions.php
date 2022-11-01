@@ -125,6 +125,17 @@ function required_field($label)
     return $label . ' <span class="text-danger">*</span>';
 }
 
+function randomColor()
+{
+    $a = dechex(rand(0, 255));
+    $a = strlen($a == 1) ? '0' . $a : $a;
+    $b = dechex(rand(0, 255));
+    $b = strlen($b == 1) ? '0' . $b : $b;
+    $c = dechex(rand(0, 255));
+    $c = strlen($c == 1) ? '0' . $c : $c;
+    return $a . $b . $c;
+}
+
 function genLicence($n)
 {
     $even = '';

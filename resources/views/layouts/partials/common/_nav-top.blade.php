@@ -11,7 +11,7 @@
             </div>
         </button>
         <div class="collapse navbar-collapse" id="navbar-content">
-            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
@@ -106,20 +106,19 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
             </ul>
-            <form class="d-flex ms-auto">
-                <div class="input-group">
-                    <input class="form-control border-0 mr-2" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-primary border-0" type="submit">Search</button>
-                </div>
-            </form>
-            @auth
-                @include('layouts.partials.common._user-menu')
-            @endauth
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <form class="d-flex ms-auto">
+                    <div class="input-group">
+                        <input class="form-control border-0 mr-2" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-primary border-0" type="submit">Search</button>
+                    </div>
+                </form>
+                @auth
+                    @include('layouts.partials.common._user-menu')
+                @endauth
+            </ul>
         </div>
     </div>
 </nav>

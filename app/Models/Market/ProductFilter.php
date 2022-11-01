@@ -6,13 +6,13 @@ use Spatie\Sluggable\{HasSlug, SlugOptions};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 
-class Section extends Model
+class ProductFilter extends Model
 {
-    public $table = 'market_sections';
-    protected $fillable = ['name', 'slug'];
-
     use HasFactory, SoftDeletes, HasSlug;
 
+    public $table = 'market_product_filters';
+    public $timestamps = false;
+    protected $fillable = ['cat_ids', 'name', 'slug', 'status'];
 
     public function getRouteKeyName()
     {
@@ -24,15 +24,5 @@ class Section extends Model
         return SlugOptions::create()
             ->generateSlugsFrom(['name'])
             ->saveSlugsTo('slug');
-    }
-
-    public static function getSections()
-    {
-        return self::with('categories')->where('status', 1)->get();
-    }
-
-    public function categories()
-    {
-        return $this->hasMany(Category::class, 'section_id')->where(['parent_id' => 0, 'status' => true])->with('subcategories');
     }
 }

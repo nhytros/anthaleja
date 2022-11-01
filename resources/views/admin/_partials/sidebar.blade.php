@@ -47,19 +47,34 @@
                                 {!! getIcon('fas', 'tags', __('Sections')) !!}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nodec nav-link{{ getActivePage('admin/market/categories*') }}"
+                            <a class="nodec nav-link{{ getActivePage('admin/market/categorie*') }}"
                                 href="{{ route('admin.market.categories') }}">
                                 {!! getIcon('fas', 'list', __('Categories')) !!}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nodec nav-link{{ getActivePage('admin/market/brands*') }}"
+                            <a class="nodec nav-link{{ getActivePage('admin/market/brand*') }}"
                                 href="{{ route('admin.market.brands') }}">
                                 {!! getIcon('fab', 'qq', __('Brands')) !!}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nodec nav-link{{ getActivePage('admin/market/products*') }}"
+                            <a class="nodec nav-link{{ getActivePage('admin/market/product*') }}"
                                 href="{{ route('admin.market.products') }}">
                                 {!! getIcon('fas', 'boxes', __('Products')) !!}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nodec nav-link{{ getActivePage('admin/market/filter*') }}"
+                                href="{{ route('admin.market.filters') }}">
+                                {!! getIcon('fas', 'filter', __('Filters')) !!}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nodec nav-link{{ getActivePage('admin/market/filter/value*') }}"
+                                href="{{ route('admin.market.filter.values') }}">
+                                {!! getIcon('fas', 'thumbtack', __('Filter values')) !!}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nodec nav-link{{ getActivePage('admin/market/banner*') }}"
+                                href="{{ route('admin.market.banners') }}">
+                                {!! getIcon('fas', 'images', __('Banners')) !!}</a>
                         </li>
                     </div>
                 </div>

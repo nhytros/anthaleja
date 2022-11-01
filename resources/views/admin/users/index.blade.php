@@ -29,30 +29,26 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table table-sm table-no-border">
+                        <table class="table table-sm table-borderless">
                             <thead>
-                                <th>{{ __('Status') }} / {{ __('Username') }} / {{ __('Email') }}</th>
+                                <th>{{ __('Status') }} / {{ __('Username') }}</th>
+                                <th>{{ __('Email') }}</th>
                                 <th>{{ __('Roles') }}</th>
                                 <th class="text-end">{{ __('Actions') }}</th>
                             </thead>
                             <tbody>
                                 @foreach ($users as $u)
-                                    <tr>
+                                    <tr class="border">
                                         <td class="d-flex flex-row align-items-center">
                                             @if ($u->status == true)
                                                 {!! getIcon('fas', 'check-circle text-success me-2') !!}
                                             @else
                                                 {!! getIcon('fas', 'stop-circle text-danger me-2') !!}
                                             @endif
-                                            <h6>
-                                                <a class="nodec" href="{{ route('admin.user.show', $u->username) }}">
-                                                    {{ $u->username }}</a> ({{ $u->characters->count() }}
-                                                {{ trans_choice('admin.user.character_count', ['count' => $u->characters->count()]) }})
-                                            </h6><br>
-                                            <h6>
-                                                <a class="nodec"
-                                                    href="{{ route('admin.user.show', $u->username) }}">{{ $u->email }}</a>
-                                            </h6>
+                                            <a href="{{ route('admin.user.show', $u->username) }}">
+                                                {{ $u->username }}</a>
+                                        <td><a href="{{ route('admin.user.show', $u->username) }}">{{ $u->email }}</a>
+                                        </td>
                                         <td>
                                             <ul>
                                                 @foreach ($u->roles as $r)
