@@ -42,7 +42,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Helpers/functions.php"
+            "app/Helpers/functions.php",
+            "app/Helpers/ATH/ATHDateTime.php"
         ]
     },
     "scripts": {

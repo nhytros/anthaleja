@@ -14,7 +14,7 @@
         <a class="navbar-brand" href="/">Anthaleja <small
                 class="text-muted fs-6">v{{ config('ath.version') }}<small></a>
         <hr>
-        {{-- @include('layouts.common._clock') --}}
+        @include('layouts.partials.common._ath-clock')
         {{-- <li><a href="#">Shortcuts</a></li> --}}
         @yield('side-links')
     </ul>
