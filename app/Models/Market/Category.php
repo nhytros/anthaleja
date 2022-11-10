@@ -48,7 +48,7 @@ class Category extends Model
     {
         $details = self::select('id', 'name', 'slug', 'description')->with(['subcategories' => function ($query) {
             $query->select('id', 'parent_id', 'name', 'slug');
-        }])->where('slug', $slug)->firstOrFail();
+        }])->where('slug', $slug)->first();
         $cIDs[] = $details->id;
         foreach ($details->subCategories as $key => $sub) {
             $cIDs[] = $sub->id;

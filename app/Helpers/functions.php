@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Market\Product;
 use Illuminate\Support\Facades\Request;
 
 
@@ -162,4 +163,20 @@ function genLicence($n)
     $div = $sum_all % 10;
     $check = ($div == 0) ? 0 : 10 - $div;
     return $n . $check;
+}
+
+function getName($order, $u)
+{
+    switch (strtolower($order)) {
+        case 'fl':
+            $output = $u->first_name . ' ' . $u->last_name;
+            break;
+        case 'lf':
+            $output = $u->last_name . ' ' . $u->first_name;
+            break;
+        case 'username':
+            $output = $u->username;
+            break;
+    }
+    return $output;
 }

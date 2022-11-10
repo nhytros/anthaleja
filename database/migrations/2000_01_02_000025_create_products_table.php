@@ -31,6 +31,7 @@ return new class extends Migration
             $table->decimal('weight', 12, 2)->nullable()->default(0);
             $table->string('main_image')->nullable();
             $table->string('video')->nullable();
+            $table->string('group_code')->nullable();
             $table->text('description')->nullable();
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();

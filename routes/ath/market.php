@@ -93,5 +93,11 @@ Route::middleware(['auth'])->prefix('market')->name('market.')->group(function (
     //     Route::get('/category/' . $url, [MarketController::class, 'listing']);
     // }
     Route::get('/category/{slug}', [UProductController::class, 'listing'])->name('category');
+    Route::get('/products/vendor/{vid}', [UProductController::class, 'listingVendor'])->name('products.vendor');
     Route::post('/filters', [UProductController::class, 'filters'])->name('filters');
+    Route::get('/view/{slug}', [UProductController::class, 'show'])->name('product.details');
+    Route::post('/product/get_product_price', [UProductController::class, 'getProductPrice']);
+    Route::get('/cart', [UProductController::class, 'cart'])->name('cart');
+    Route::post('/cart/add', [UProductController::class, 'addCart'])->name('product.addCart');
+    Route::post('/cart/update', [UProductController::class, 'updateCart'])->name('cart.update');
 });

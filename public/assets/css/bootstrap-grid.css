@@ -4,93 +4,72 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@font-face {
-  font-family: "EasyReading";
-  src: url(../webfonts/EasyReading.eot?#iefix) format("embedded-opentype"), url(../webfonts//EasyReading.woff) format("woff"), url(../webfonts//EasyReading.ttf) format("truetype"), url(../webfonts//EasyReading.svg#EasyReading) format("svg");
-  font-style: normal;
-  font-weight: 400;
-}
-* {
-  font-family: EasyReading;
-}
-
 :root {
-  --bs-blue: #00335b;
-  --bs-indigo: #4b0082;
-  --bs-purple: #800080;
-  --bs-pink: #fa8072;
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
   --bs-red: #dc3545;
-  --bs-orange: #ffa500;
+  --bs-orange: #fd7e14;
   --bs-yellow: #ffc107;
   --bs-green: #198754;
-  --bs-teal: #008080;
+  --bs-teal: #20c997;
   --bs-cyan: #0dcaf0;
-  --bs-black: #0b0f13;
-  --bs-white: #f4f0ec;
-  --bs-gray: #686969;
-  --bs-gray-dark: #393c3e;
-  --bs-gray-100: #dcd9d6;
-  --bs-gray-200: #c5c3c0;
-  --bs-gray-300: #aeacaa;
-  --bs-gray-400: #969695;
-  --bs-gray-500: #7f7f7f;
-  --bs-gray-600: #686969;
-  --bs-gray-700: #505254;
-  --bs-gray-800: #393c3e;
-  --bs-gray-900: #222528;
-  --bs-primary: #00335b;
-  --bs-secondary: #686969;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-500: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
-  --bs-indigo: #4b0082;
-  --bs-purple: #800080;
-  --bs-pink: #fa8072;
-  --bs-orange: #ffa500;
-  --bs-teal: #008080;
-  --bs-light: #dcd9d6;
-  --bs-dark: #222528;
-  --bs-primary-rgb: 0, 51, 91;
-  --bs-secondary-rgb: 104, 105, 105;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-primary-rgb: 13, 110, 253;
+  --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
   --bs-danger-rgb: 220, 53, 69;
-  --bs-indigo-rgb: 75, 0, 130;
-  --bs-purple-rgb: 128, 0, 128;
-  --bs-pink-rgb: 250, 128, 114;
-  --bs-orange-rgb: 255, 165, 0;
-  --bs-teal-rgb: 0, 128, 128;
-  --bs-light-rgb: 220, 217, 214;
-  --bs-dark-rgb: 34, 37, 40;
-  --bs-white-rgb: 244, 240, 236;
-  --bs-black-rgb: 11, 15, 19;
-  --bs-body-color-rgb: 34, 37, 40;
-  --bs-body-bg-rgb: 244, 240, 236;
-  --bs-font-easyreading: EasyReading;
+  --bs-light-rgb: 248, 249, 250;
+  --bs-dark-rgb: 33, 37, 41;
+  --bs-white-rgb: 255, 255, 255;
+  --bs-black-rgb: 0, 0, 0;
+  --bs-body-color-rgb: 33, 37, 41;
+  --bs-body-bg-rgb: 255, 255, 255;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(180deg, rgba(244, 240, 236, 0.15), rgba(244, 240, 236, 0));
-  --bs-body-font-family: EasyReading;
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-body-font-family: var(--bs-font-sans-serif);
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
-  --bs-body-color: #222528;
-  --bs-body-bg: #f4f0ec;
+  --bs-body-color: #212529;
+  --bs-body-bg: #fff;
   --bs-border-width: 1px;
   --bs-border-style: solid;
-  --bs-border-color: #aeacaa;
-  --bs-border-color-translucent: rgba(11, 15, 19, 0.175);
+  --bs-border-color: #dee2e6;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
   --bs-border-radius: 0.375rem;
   --bs-border-radius-sm: 0.25rem;
   --bs-border-radius-lg: 0.5rem;
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #00335b;
-  --bs-link-hover-color: #002949;
-  --bs-code-color: #fa8072;
+  --bs-link-color: #0d6efd;
+  --bs-link-hover-color: #0a58ca;
+  --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
 
@@ -4140,4 +4119,6 @@
   .d-print-none {
     display: none !important;
   }
-}/*# sourceMappingURL=bootstrap-grid.css.map */
+}
+
+/*# sourceMappingURL=bootstrap-grid.css.map */

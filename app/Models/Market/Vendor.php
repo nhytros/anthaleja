@@ -26,6 +26,6 @@ class Vendor extends Model
 
     public function vdetails()
     {
-        return $this->hasOne(VendorBD::class);
+        return $this->belongsTo(VendorBD::class, 'id', 'vendor_id');
     }
 }

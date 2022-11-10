@@ -1,6 +1,8 @@
 <div class="col-xl-3 col-sm-6">
     <div class="card shadow mb-2">
-        <img src="{{ $product->main_image }}" class="card-img-top" alt="{{ $product->name }}">
+        <a href="{{ route('market.product.details', $product->slug) }}">
+            <img src="{{ $product->main_image }}" class="card-img-top" alt="{{ $product->name }}">
+        </a>
         @if ($product->created_at >= now()->subDays(7))
             <span class="product-ribbon product-ribbon-right product-ribbon--style-1 bg-blue text-uppercase">New</span>
         @endif
@@ -9,7 +11,9 @@
                 class="product-promo product-promo-right product-promo--style-1 bg-blue text-uppercase">{{ intval($product->getPricePromo($product->id)['discount']) }}%</span>
         @endif
         <div class="card-body">
-            <h5 class="card-title">{{ $product->name }}</h5>
+            <a href="{{ route('market.product.details', $product->slug) }}">
+                <h5 class="card-title">{{ $product->name }}</h5>
+            </a>
             <div class="d-flex flex-row justify-content-center">
                 @if ($product->getPricePromo($product->id))
                     <div class="px-2 text-decoration-line-through">{{ toAthel($product->price) }}</div>
@@ -22,8 +26,7 @@
             <div class="text-truncate">{!! $product->description !!}</div>
         </div>
         <div class="card-footer text-end my-1">
-            <a href="#" class="btn btn-sm btn-danger btn-fav">{!! getIcon('fas', 'heart') !!}</a>
-            <a href="#" class="btn btn-sm btn-info btn-cart">{!! getIcon('fas', 'cart-plus') !!}</a>
+            <a href="#" class="btn btn-sm btn-light btn-fav">{!! getIcon('fas', 'heart') !!}</a>
         </div>
     </div>
 </div>

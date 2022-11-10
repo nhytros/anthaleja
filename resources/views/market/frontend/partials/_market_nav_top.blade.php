@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary shadow">
     <div class="container-fluid">
-
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content">
             <div class="hamburger-toggle">
                 <div class="hamburger">
@@ -125,6 +124,65 @@
                     </li>
                 </ul>
             </li>
+            @if (isset($items) && $items->count() > 0)
+                <?php $total = 0; ?>
+                @foreach ($items as $ci)
+                    <?php $total += ($ci->product->getPricePromo($ci->product->id)['price_promo'] ?? $ci->product->price) * $ci->quantity; ?>
+                @endforeach
+
+                <li id="cart-dropdown" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {!! getIcon('fas', 'shopping-cart') !!}&nbsp;({{ $items->count() }}&nbsp;|&nbsp;{{ trans('market.cart.subtotal') }}:
+                        {{ toAthel($total) }})
+                    </a>
+                    <div id="cart-dropdown" class="dropdown-menu dropdown-cart actions">
+                        <p class="text-center">Subtotal</p>
+                        <p class="text-center">{{ toAthel($total) }}</p>
+                        <span class="ms-auto me-auto"><a class="btn btn-sm btn-light"
+                                href="{{ route('market.cart') }}">{{ trans('market.cart.goto') }}</a></span>
+                        <span>
+                            <hr class="dropdown-divider">
+                        </span>
+                        @foreach ($items as $ci)
+                            <div class="card mx-1 mb-1">
+                                <img src="{{ $ci->product->main_image }}" class="card-img-top">
+                                <div class="card-body">
+                                    <h6 class="card-title text-center fw-bold">
+                                        {{ toAthel($ci->product->getPricePromo($ci->product->id)['price_promo'] ?? $ci->product->price) }}
+                                    </h6>
+                                    <form action="{{ route('market.cart.update') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="cid" value="{{ $ci->id }}">
+                                        <input type="hidden" name="pid" value="{{ $ci->product->id }}">
+                                        <span class="input-group pt-3">
+                                            <input type="text" class="form-control form-control-sm"
+                                                name="quantity" value="{{ $ci->quantity }}" readonly />
+                                            <button name="del" type="submit"
+                                                class="actions btn btn-danger btn-sm"
+                                                value="1">{!! getIcon('fas', 'trash') !!}</button>
+                                            @if ($ci->quantity > 1)
+                                                <button name="sub" type="submit"
+                                                    class="actions btn btn-secondary btn-sm"
+                                                    value="1">{!! getIcon('fas', 'minus') !!}</button>
+                                            @endif
+                                            <button name="add" type="submit"
+                                                class="actions btn btn-secondary btn-sm"
+                                                value="1">{!! getIcon('fas', 'plus') !!}</button>
+                                        </span>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    {{-- </li> <a href="{{ route('market.cart') }}">
+                        <span class="fa-layers fa-fw text-light bg-secondary fa-2x">
+                            {!! getIcon('fas', 'shopping-cart') !!}
+                            <span class="fa-layers-text text-dark fw-bold"
+                                data-fa-transform="shrink-9 up-2">{{ \App\Models\Market\Cart::cartItems()->count() }}</span>
+                        </span>
+                    </a> --}}
+            @endif
             </ul>
         </div>
     </div>
@@ -132,6 +190,11 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#cart-dropdown .dropdown-menu .dropdown-cart .actions').on({
+            "click": function(e) {
+                e.stopPropagation();
+            }
+        });
         $(".dropdown,.dropdown-mega,.dropend").hover(function() {
             var dropdownMenu =
                 $(this).children(".dropdown-menu");

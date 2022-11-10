@@ -14,6 +14,7 @@
     <meta name="keywords" content="{{ $meta_keywords ?? '' }}">
     <meta name="description" content="{{ $meta_description ?? '' }}s">
     <meta name="author" content="{{ 'Marco WebDesign' }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('meta')
 
     <title>{{ $title ?? env('APP_NAME') }}</title>

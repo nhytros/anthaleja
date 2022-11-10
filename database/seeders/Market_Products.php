@@ -5,12 +5,13 @@ namespace Database\Seeders;
 use App\Models\Auth\User;
 use Faker\Factory as Faker;
 use App\Models\Market\Brand;
+use App\Models\Auth\Character;
 use App\Models\Market\Product;
 use App\Models\Market\Section;
 use App\Models\Market\Category;
-use App\Models\Market\ProductAttribute;
-use App\Models\Market\ProductImage;
 use Illuminate\Database\Seeder;
+use App\Models\Market\ProductImage;
+use App\Models\Market\ProductAttribute;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class Market_Products extends Seeder
@@ -22,10 +23,15 @@ class Market_Products extends Seeder
      */
     public function run()
     {
+        $vArray = [];
         $faker = Faker::create();
         $sections = Section::all();
         $brands = Brand::count();
         $vendor_ids = User::role('vendor')->pluck('id');
+        foreach ($vendor_ids as $vid) {
+            $chid = Character::where('user_id', $vid)->first();
+            if (isset($chid)) array_push($vArray, $chid->id);
+        }
         for ($p = 1; $p <= 288; $p++) {
             $section_id = $faker->numberBetween(1, $sections->count());
             $cids = Category::where('section_id', $section_id)->get();
@@ -41,7 +47,7 @@ class Market_Products extends Seeder
                 'section_id' => $section_id,
                 'category_id' => $faker->randomElement($cidArray),
                 'brand_id' => $faker->numberBetween(1, $brands),
-                'vendor_id' => $faker->randomElement($vendor_ids),
+                'vendor_id' => $faker->randomElement($vArray),
                 'name' => $name = 'Product #' . $p,
                 'code' => $faker->unique()->ean8(),
                 'color' => $faker->safeColorName(),
@@ -52,6 +58,7 @@ class Market_Products extends Seeder
                 'weight' => $faker->numberBetween(0, 10000) / 100,
                 'main_image' => $faker->imageUrl(800, 600, null, true, $p, false, 'png'),
                 'video' => $faker->boolean(20) ? '5Peo-ivmupE' : null,
+                'group_code' => $faker->numberBetween(1, 100),
                 'description' => $faker->paragraphs(6, true),
                 'meta_title' => $name,
                 'meta_description' => $faker->sentence(),
