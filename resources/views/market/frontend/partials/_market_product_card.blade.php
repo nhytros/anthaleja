@@ -1,4 +1,4 @@
-<div class="col-xl-3 col-sm-6">
+<div class="col-xl-2 col-lg-4 col-md-6 col-sm-6">
     <div class="card shadow mb-2">
         <a href="{{ route('market.product.details', $product->slug) }}">
             <img src="{{ $product->main_image }}" class="card-img-top" alt="{{ $product->name }}">
@@ -12,15 +12,14 @@
         @endif
         <div class="card-body">
             <a href="{{ route('market.product.details', $product->slug) }}">
-                <h5 class="card-title">{{ $product->name }}</h5>
+                <h6 class="card-title">{{ $product->name }}</h6>
             </a>
-            <div class="d-flex flex-row justify-content-center">
+            <div class="text-center">
                 @if ($product->getPricePromo($product->id))
-                    <div class="px-2 text-decoration-line-through">{{ toAthel($product->price) }}</div>
-                    <div class="px-2 text-danger fs-4">
-                        {{ toAthel($product->getPricePromo($product->id)['price_promo']) }}</div>
+                    <span class="px-2 text-decoration-line-through">
+                        {{ toAthel($product->price) }}</span>&nbsp;&nbsp;{{ toAthel($product->getPricePromo($product->id)['price_promo']) }}
                 @else
-                    <div class="px-2 fs-4">{{ toAthel($product->price) }}</div>
+                    <span class="px-2 fs-6">{{ toAthel($product->price) }}</span>
                 @endif
             </div>
             <div class="text-truncate">{!! $product->description !!}</div>

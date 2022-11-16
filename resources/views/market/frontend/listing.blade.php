@@ -39,7 +39,7 @@
                         <div class="card-title pt-2">{{ $details['details']['description'] ?? '' }}</div>
                         <div id="products" class="row view-group me-2">
                             @foreach ($products as $product)
-                                @include('market.frontend.partials._market_products_listing_card',
+                                @include('market.frontend.partials._market_product_card',
                                     ['width' => null, 'cart' => false],
                                     compact('product'))
                             @endforeach
